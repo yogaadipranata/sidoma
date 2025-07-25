@@ -1,6 +1,6 @@
 # Sistem Informasi Akademik Dosen & Mahasiswa
 
-**Sistem Informasi Akademik Dosen & Mahasiswa** adalah platform berbasis web yang dikembangkan untuk memfasilitasi pengelolaan data perkuliahan, nilai, Kartu Rencana Studi (KRS), dan jadwal, dengan dukungan peran pengguna yang berbeda (Dosen dan Mahasiswa). SIDOMA mengintegrasikan fitur-fitur penting untuk operasional akademik yang efisien dan user-friendly.
+**Sistem Informasi Akademik Dosen & Mahasiswa (SIDOMA)** adalah platform berbasis web yang dikembangkan untuk memfasilitasi pengelolaan data perkuliahan, nilai, Kartu Rencana Studi (KRS), dan jadwal, dengan dukungan peran pengguna yang berbeda (Dosen dan Mahasiswa). SIDOMA mengintegrasikan fitur-fitur penting untuk operasional akademik yang efisien dan user-friendly.
 
 ### 🛠️ Tech Stack
 * **Backend:** Laravel v12.21.0 (PHP 8.2+)
