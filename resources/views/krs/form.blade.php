@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-start mb-4"> {{-- mb-4 untuk margin bawah --}}
+            <div class="flex justify-start mb-4">
                 <x-secondary-button onclick="window.location='{{ route('dashboard') }}'">
                     {{ __('Kembali ke Dashboard') }}
                 </x-secondary-button>

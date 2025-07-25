@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-start mt-4">
+            <div class="flex justify-start mt-4 mb-4">
                 <x-secondary-button onclick="window.location='{{ route('dosen.schedules_index') }}'">
                     {{ __('Kembali ke Daftar Jadwal') }}
                 </x-secondary-button>

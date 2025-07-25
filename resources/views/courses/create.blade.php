@@ -7,9 +7,9 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-start mt-4">
+            <div class="flex justify-start mt-4 mb-4">
                 <x-secondary-button onclick="window.location='{{ route('courses.index') }}'">
-                    {{ __('Kembali ke Daftar') }}
+                    {{ __('Kembali ke Daftar Mata Kuliah') }}
                 </x-secondary-button>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
