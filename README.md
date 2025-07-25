@@ -1,10 +1,10 @@
-# Sistem Informasi Akademik Sederhana (SIAD)
+# Sistem Informasi Akademik Dosen & Mahasiswa
 
-**Sistem Informasi Akademik Sederhana (SIAD)** adalah platform berbasis web yang dikembangkan sebagai proyek akhir untuk [Sebutkan Program Anda, contoh: Program Pengembang Web di PT Hacktivate Teknologi Indonesia, atau tugas kampus]. Project ini dirancang untuk memfasilitasi pengelolaan data perkuliahan, nilai, Kartu Rencana Studi (KRS), dan jadwal, dengan dukungan peran pengguna yang berbeda (Dosen dan Mahasiswa). SIAD mengintegrasikan fitur-fitur penting untuk operasional akademik yang efisien dan user-friendly.
+**Sistem Informasi Akademik Dosen & Mahasiswa** adalah platform berbasis web yang dikembangkan untuk memfasilitasi pengelolaan data perkuliahan, nilai, Kartu Rencana Studi (KRS), dan jadwal, dengan dukungan peran pengguna yang berbeda (Dosen dan Mahasiswa). SIDOMA mengintegrasikan fitur-fitur penting untuk operasional akademik yang efisien dan user-friendly.
 
 ### 🛠️ Tech Stack
-* **Backend:** Laravel v11.x (PHP 8.2+)
-* **Database:** MySQL (digunakan via XAMPP)
+* **Backend:** Laravel v12.21.0 (PHP 8.2+)
+* **Database:** MySQL
 * **Frontend Framework:** Tailwind CSS v3
 * **Bundler Aset:** Vite v5
 * **JavaScript Libraries:** Alpine.js, SweetAlert2
@@ -20,7 +20,7 @@
     * Konversi nilai angka ke huruf otomatis (A, B+, B, C+, C, D, E).
     * Mahasiswa dapat Melihat Transkrip Nilai mereka.
 * **Sistem Kartu Rencana Studi (KRS) Sederhana:**
-    * Mahasiswa dapat Mengisi/Memilih mata kuliah untuk KRS mereka per semester/tahun akademik.
+    * Mahasiswa dapat Mengisi/Memilih mata kuliah untuk KRS.
     * Status KRS (Menunggu/Disetujui/Ditolak) ditampilkan kepada mahasiswa.
     * Mata kuliah yang Disetujui tidak dapat diubah oleh mahasiswa di form KRS.
     * KRS yang Ditolak tetap tampil dengan alasan dan dapat dihapus oleh mahasiswa.
@@ -30,13 +30,13 @@
 * **Penjadwalan Kuliah Sederhana:**
     * Dosen dapat Mengelola (Tambah, Lihat, Edit, Hapus) jadwal mata kuliah (Hari, Waktu, Ruangan).
     * Mahasiswa dapat Melihat Jadwal Kuliah mereka yang disetujui dalam tampilan per hari.
-* **Penyempurnaan UI/UX:** Notifikasi interaktif via SweetAlert2, tombol "Kembali" yang jelas, logo kustom, favicon, dan judul halaman konsisten "SIDOMA".
 
 ## 🚀 Usage
 
 ### 💻 Run Locally
 Pastikan Anda memiliki lingkungan pengembangan berikut terinstal di komputer Anda:
-* **XAMPP** (dengan PHP versi 8.2 atau lebih tinggi, dan MySQL)
+* **Web Server dengan PHP:** Contohnya, **XAMPP** (disarankan untuk pemula), Laragon, MAMP, atau instalasi PHP (versi 8.2 atau lebih tinggi) dan server web (Apache/Nginx) secara terpisah.
+* **Database MySQL:** Biasanya disertakan dalam paket seperti XAMPP/Laragon. Pastikan layanan MySQL berjalan.
 * **Composer** (Manajer Dependensi PHP)
 * **Node.js & npm** (Runtime JavaScript & Manajer Paket)
 
@@ -44,11 +44,9 @@ Langkah-langkah instalasi dan menjalankan proyek:
 
 1.  **Clone Repositori:**
     ```bash
-    git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
-    cd YOUR_REPO_NAME # Masuk ke folder proyek yang baru di-clone
+    git clone https://github.com/yogaadipranata/sidoma.git
+    cd sidoma # Masuk ke folder proyek yang baru di-clone
     ```
-    *(Ganti `YOUR_USERNAME/YOUR_REPO_NAME` dengan URL repositori GitHub Anda)*
-
 2.  **Konfigurasi Environment:**
     * Buat salinan file `.env.example` menjadi `.env`:
         ```bash
@@ -60,11 +58,11 @@ Langkah-langkah instalasi dan menjalankan proyek:
         DB_CONNECTION=mysql
         DB_HOST=127.0.0.1
         DB_PORT=3306
-        DB_DATABASE=siakad_db # Pastikan database ini sudah dibuat di phpMyAdmin Anda
-        DB_USERNAME=root      # Username MySQL XAMPP Anda (biasanya 'root')
-        DB_PASSWORD=          # Password MySQL XAMPP Anda (biasanya kosong, tanpa spasi)
+        DB_DATABASE=sidoma_db # Pastikan database ini sudah dibuat di phpMyAdmin Anda
+        DB_USERNAME=root      # Username MySQL Anda (biasanya 'root')
+        DB_PASSWORD=          # Password MySQL Anda (biasanya kosong, tanpa spasi)
         ```
-    * **Buat database `siakad_db` secara manual di phpMyAdmin** (`http://localhost/phpmyadmin`). Pastikan layanan Apache dan MySQL di XAMPP Control Panel Anda berjalan.
+    * **Buat database kosong bernama `sidoma_db` secara manual** menggunakan alat manajemen database pilihan Anda (misalnya, phpMyAdmin, MySQL Workbench, DBeaver, atau melalui command line MySQL). Pastikan layanan server database MySQL Anda berjalan.
 
 3.  **Instal Dependensi PHP & Laravel Breeze:**
     ```bash
@@ -107,16 +105,16 @@ Langkah-langkah instalasi dan menjalankan proyek:
 Berikut adalah akun yang bisa digunakan untuk pengujian, yang perlu Anda buat secara manual setelah menjalankan migrasi database:
 
 * **Dosen:**
-    * **Email:** `dosen@example.com`
-    * **Password:** `password`
+    * **Email:** `dosen@univ.com`
+    * **Password:** `dosen123!`
     * **Cara Membuat Akun Dosen:**
         Setelah menjalankan `php artisan migrate` (Langkah 6 di atas) dan sebelum menjalankan `php artisan serve`, buka terminal baru (tetap di folder proyek Anda) dan jalankan perintah berikut. Setelah itu, akun dosen siap digunakan.
         ```bash
         php artisan tinker
         App\Models\User::create([
-            'name' => 'Dosen Penguji',
-            'email' => 'dosen@example.com',
-            'password' => Hash::make('password'),
+            'name' => 'Dosen Universitas',
+            'email' => 'dosen@univ.com',
+            'password' => Hash::make('dosen123!'),
             'role' => 'dosen',
         ]);
         exit;
