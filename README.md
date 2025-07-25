@@ -1,61 +1,138 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistem Informasi Akademik Dosen & Mahasiswa
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Sistem Informasi Akademik Dosen & Mahasiswa (SIDOMA)** adalah platform berbasis web yang dikembangkan untuk memfasilitasi pengelolaan data perkuliahan, nilai, Kartu Rencana Studi (KRS), dan jadwal, dengan dukungan peran pengguna yang berbeda (Dosen dan Mahasiswa). SIDOMA mengintegrasikan fitur-fitur penting untuk operasional akademik yang efisien dan user-friendly.
 
-## About Laravel
+### 🛠️ Tech Stack
+* **Backend:** Laravel v12.21.0 (PHP 8.2+)
+* **Database:** MySQL
+* **Frontend Framework:** Tailwind CSS v3
+* **Bundler Aset:** Vite v5
+* **JavaScript Libraries:** Alpine.js, SweetAlert2
+* **Dependency Management:** Composer (PHP), npm (Node.js)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Fitur-fitur Utama
+* **Sistem Otentikasi & Role:** Login, Register, Logout dengan dua peran pengguna (Dosen & Mahasiswa).
+* **Pembatasan Akses:** Halaman dan fitur spesifik role dilindungi oleh middleware kustom.
+* **Manajemen Profil:** Pengguna dapat memperbarui informasi profil umum (nama, email, telepon, alamat) dan data spesifik role (NIM untuk Mahasiswa, NIDN untuk Dosen).
+* **Manajemen Mata Kuliah (CRUD Lengkap):** Dosen dapat Menambah, Melihat, Mengedit, dan Menghapus data mata kuliah dengan konfirmasi hapus via SweetAlert2.
+* **Manajemen Nilai:**
+    * Dosen dapat Menginput dan Memperbarui nilai mahasiswa untuk mata kuliah.
+    * Konversi nilai angka ke huruf otomatis (A, B+, B, C+, C, D, E).
+    * Mahasiswa dapat Melihat Transkrip Nilai mereka.
+* **Sistem Kartu Rencana Studi (KRS) Sederhana:**
+    * Mahasiswa dapat Mengisi/Memilih mata kuliah untuk KRS.
+    * Status KRS (Menunggu/Disetujui/Ditolak) ditampilkan kepada mahasiswa.
+    * Mata kuliah yang Disetujui tidak dapat diubah oleh mahasiswa di form KRS.
+    * KRS yang Ditolak tetap tampil dengan alasan dan dapat dihapus oleh mahasiswa.
+* **Validasi KRS oleh Dosen:**
+    * Dosen dapat Melihat daftar KRS yang Menunggu persetujuan.
+    * Dosen dapat Menyetujui atau Menolak pengajuan KRS (dengan konfirmasi SweetAlert2).
+* **Penjadwalan Kuliah Sederhana:**
+    * Dosen dapat Mengelola (Tambah, Lihat, Edit, Hapus) jadwal mata kuliah (Hari, Waktu, Ruangan).
+    * Mahasiswa dapat Melihat Jadwal Kuliah mereka yang disetujui dalam tampilan per hari.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Usage
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 💻 Run Locally
+Pastikan Anda memiliki lingkungan pengembangan berikut terinstal di komputer Anda:
+* **Web Server dengan PHP:** Contohnya, **XAMPP** (disarankan untuk pemula), Laragon, MAMP, atau instalasi PHP (versi 8.2 atau lebih tinggi) dan server web (Apache/Nginx) secara terpisah.
+* **Database MySQL:** Biasanya disertakan dalam paket seperti XAMPP/Laragon. Pastikan layanan MySQL berjalan.
+* **Composer** (Manajer Dependensi PHP)
+* **Node.js & npm** (Runtime JavaScript & Manajer Paket)
 
-## Learning Laravel
+Langkah-langkah instalasi dan menjalankan proyek:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1.  **Clone Repositori:**
+    ```bash
+    git clone https://github.com/yogaadipranata/sidoma.git
+    cd sidoma # Masuk ke folder proyek yang baru di-clone
+    ```
+2.  **Konfigurasi Environment:**
+    * Buat salinan file `.env.example` menjadi `.env`:
+        ```bash
+        cp .env.example .env
+        # Atau di Windows: copy .env.example .env
+        ```
+    * Buka file `.env` dan konfigurasikan detail koneksi database MySQL Anda:
+        ```dotenv
+        DB_CONNECTION=mysql
+        DB_HOST=127.0.0.1
+        DB_PORT=3306
+        DB_DATABASE=sidoma_db # Pastikan database ini sudah dibuat di phpMyAdmin Anda
+        DB_USERNAME=root      # Username MySQL Anda (biasanya 'root')
+        DB_PASSWORD=          # Password MySQL Anda (biasanya kosong, tanpa spasi)
+        ```
+    * **Buat database kosong bernama `sidoma_db` secara manual** menggunakan alat manajemen database pilihan Anda (misalnya, phpMyAdmin, MySQL Workbench, DBeaver, atau melalui command line MySQL). Pastikan layanan server database MySQL Anda berjalan.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3.  **Instal Dependensi PHP & Laravel Breeze:**
+    ```bash
+    composer install
+    composer require laravel/breeze --dev
+    php artisan breeze:install blade
+    ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4.  **Instal Dependensi JavaScript & Kompilasi Aset:**
+    ```bash
+    npm install
+    npm run dev # PENTING: Biarkan perintah ini berjalan di terminal terpisah selama pengujian!
+    ```
 
-## Laravel Sponsors
+5.  **Generate Application Key:**
+    ```bash
+    php artisan key:generate
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+6.  **Jalankan Migrasi Database:**
+    * Pastikan Apache dan MySQL di XAMPP Control Panel Anda berjalan (Running).
+    * Jalankan migrasi untuk membuat semua tabel database:
+        ```bash
+        php artisan migrate
+        ```
+    * *(Jika mengalami error "Column already exists" atau masalah migrasi, Anda bisa mencoba `php artisan migrate:fresh` untuk membersihkan dan membuat ulang semua tabel. Namun, ini akan menghapus semua data yang ada.)*
 
-### Premium Partners
+7.  **Bersihkan Cache Aplikasi:**
+    ```bash
+    php artisan optimize:clear
+    ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+8.  **Jalankan Server Lokal:**
+    ```bash
+    php artisan serve
+    ```
+    * Akses aplikasi di browser Anda: `http://127.0.0.1:8000`
 
-## Contributing
+### 🔑 Akun Demo
+Berikut adalah akun yang bisa digunakan untuk pengujian, yang perlu Anda buat secara manual setelah menjalankan migrasi database:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+* **Dosen:**
+    * **Email:** `dosen@univ.com`
+    * **Password:** `dosen123!`
+    * **Cara Membuat Akun Dosen:**
+        Setelah menjalankan `php artisan migrate` (Langkah 6 di atas) dan sebelum menjalankan `php artisan serve`, buka terminal baru (tetap di folder proyek Anda) dan jalankan perintah berikut. Setelah itu, akun dosen siap digunakan.
+        ```bash
+        php artisan tinker
+        App\Models\User::create([
+            'name' => 'Dosen Universitas',
+            'email' => 'dosen@univ.com',
+            'password' => Hash::make('dosen123!'),
+            'role' => 'dosen',
+        ]);
+        exit;
+        ```
 
-## Code of Conduct
+* **Mahasiswa:**
+    * Anda dapat mendaftar akun Mahasiswa baru melalui halaman `/register` di aplikasi (`http://127.0.0.1:8000/register`).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 🔗 Live Demo
+[Tidak ada live demo untuk proyek ini karena kebutuhan hosting backend PHP dan database. Proyek ini dirancang untuk dijalankan secara lokal.]
 
-## Security Vulnerabilities
+## 🤝 Contributing Guidelines
+1. Fork the project
+2. Create a feature branch (`git checkout -b feature/nama-fitur`)
+3. Commit your changes (`git commit -m "feat: tambahkan fitur baru"`)
+4. Push to the branch (`git push origin feature/nama-fitur`)
+5. Open a pull request
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 📫 Contact
+I Wayan Yoga Adi Pranata
+[Email](mailto:yogaadipranata10@gmail.com)
