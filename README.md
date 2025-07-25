@@ -136,5 +136,3 @@ Berikut adalah akun yang bisa digunakan untuk pengujian, yang perlu Anda buat se
 ## 📫 Contact
 I Wayan Yoga Adi Pranata
 [Email](mailto:yogaadipranata10@gmail.com)
-
-**Selamat Mengerjakan dan Semoga Berhasil!**
