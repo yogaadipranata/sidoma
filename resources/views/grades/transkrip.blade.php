@@ -17,6 +17,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h3 class="text-lg font-semibold mb-4">Transkrip Nilai Mahasiswa: {{ $student->name }}</h3>
+                    <p class="mb-4 text-xl font-bold">IPK: {{ $ipk }}</p>
 
                     @if ($grades->isEmpty())
                         <p>Belum ada nilai yang tercatat untuk Anda.</p>

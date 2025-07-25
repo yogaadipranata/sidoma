@@ -55,13 +55,33 @@ class GradeController extends Controller
     /**
      * Menampilkan transkrip nilai untuk mahasiswa yang sedang login.
      */
-    public function showTranskrip() // <---- PASTIKAN METHOD INI ADA
+    public function showTranskrip()
     {
-        $student = Auth::user(); // Dapatkan user mahasiswa yang sedang login
+        $student = Auth::user();
+
         // Ambil semua nilai mahasiswa ini, dengan relasi ke mata kuliah dan dosen
         $grades = $student->grades()->with(['course', 'lecturer'])->get();
 
-        return view('grades.transkrip', compact('student', 'grades'));
+        $totalSks = 0;
+        $totalBobot = 0;
+
+        foreach ($grades as $grade) {
+            // Pastikan nilai huruf valid dan mata kuliah memiliki SKS
+            if ($grade->letter_grade && $grade->course && $grade->course->credits) {
+                $totalSks += $grade->course->credits;
+                $totalBobot += ($grade->weight_grade * $grade->course->credits);
+            }
+        }
+
+        $ipk = 0;
+        if ($totalSks > 0) {
+            $ipk = $totalBobot / $totalSks;
+        }
+
+        // Format IPK menjadi 2 desimal
+        $ipk = number_format($ipk, 2);
+
+        return view('grades.transkrip', compact('student', 'grades', 'ipk')); // Kirimkan IPK ke view
     }
 
     /**
